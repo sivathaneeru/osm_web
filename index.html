@@ -1190,6 +1190,7 @@ If you are seeking expert and compassionate care for your child, Dr. T. Vittal M
 </section>
 </footer>
 <script type="speculationrules">
+
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":["/wp-*.php","/wp-admin/*","/wp-content/uploads/sites/98/*","/wp-content/*","/wp-content/plugins/*","/wp-content/themes/hello-elementor/*","/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
 <script>
@@ -1225,6 +1226,99 @@ If you are seeking expert and compassionate care for your child, Dr. T. Vittal M
 			document.body.className = c;
 		})();
 	</script>
+
+	<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const counters = document.querySelectorAll(".elementor-counter-number");
+
+    const animateCounter = (counter) => {
+
+        const fromValue = parseFloat(counter.getAttribute("data-from-value")) || 0;
+        const toValue = parseFloat(counter.getAttribute("data-to-value")) || 0;
+        const duration = parseInt(counter.getAttribute("data-duration")) || 2000;
+        const delimiter = counter.getAttribute("data-delimiter");
+
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Smooth animation
+            const currentValue =
+                fromValue + (toValue - fromValue) * progress;
+
+            // Preserve decimal values such as 4.8
+            let formattedValue;
+
+            if (toValue % 1 !== 0) {
+                formattedValue = currentValue.toFixed(1);
+            } else {
+                formattedValue = Math.floor(currentValue);
+            }
+
+            // Add comma delimiter
+            if (delimiter === ",") {
+                formattedValue = Number(formattedValue).toLocaleString("en-US", {
+                    maximumFractionDigits: 1
+                });
+            }
+
+            counter.textContent = formattedValue;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                // Ensure final value is exact
+                counter.textContent =
+                    toValue % 1 !== 0
+                        ? toValue.toFixed(1)
+                        : toValue.toLocaleString("en-US");
+            }
+        }
+
+        requestAnimationFrame(updateCounter);
+    };
+
+
+    /*
+     * Start animation when counters become visible
+     */
+    const observer = new IntersectionObserver((entries, observer) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                const counter = entry.target;
+
+                // Prevent animation from running multiple times
+                if (!counter.dataset.animated) {
+
+                    counter.dataset.animated = "true";
+
+                    animateCounter(counter);
+                }
+
+                observer.unobserve(counter);
+            }
+
+        });
+
+    }, {
+        threshold: 0.5
+    });
+
+
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
+
+});
+</script>
+
 <link href="assets/css/wc-blocks-5315fcfc.css" id="wc-blocks-style-css" media="all" rel="stylesheet"/>
 <link href="assets/css/jeg-dynamic-styles-6e00a5a9.css" id="jeg-dynamic-style-css" media="all" rel="stylesheet"/>
 <link href="assets/css/heading-18d30276.css" id="ekit-heading-css" media="all" rel="stylesheet"/>
