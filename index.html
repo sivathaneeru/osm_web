@@ -1173,7 +1173,7 @@ If you are seeking expert and compassionate care for your child, Dr. T. Vittal M
 <div class="elementor-column elementor-col-100 elementor-inner-column elementor-element elementor-element-1e18e43" data-e-type="column" data-element_type="column" data-id="1e18e43">
 <div class="elementor-widget-wrap elementor-element-populated">
 <div class="elementor-element elementor-element-02d44ee elementor-widget elementor-widget-text-editor" data-e-type="widget" data-element_type="widget" data-id="02d44ee" data-widget_type="text-editor.default">
-<p>Copyright © 2025 Om Supatham Hospital. All rights reserved.</p> </div>
+<p class="copyright"></p> </div>
 <div class="elementor-element elementor-element-549c949 elementor-widget elementor-widget-text-editor" data-e-type="widget" data-element_type="widget" data-id="549c949" data-widget_type="text-editor.default">
 <p>Powered by</p> </div>
 <div class="elementor-element elementor-element-1bb8849 elementor-widget elementor-widget-image" data-e-type="widget" data-element_type="widget" data-id="1bb8849" data-widget_type="image.default">
@@ -1218,6 +1218,10 @@ If you are seeking expert and compassionate care for your child, Dr. T. Vittal M
 				events.forEach( ( event ) => {
 					document.addEventListener( event, lazyloadRunObserver );
 				} );
+
+				document.querySelector(".copyright").innerHTML =
+               `Copyright © ${new Date().getFullYear()} Om Supatham Hospital. All rights reserved. `;
+
 			</script>
 <script>
 		(function () {
